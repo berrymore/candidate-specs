@@ -29,35 +29,44 @@ class SimpleContainer
 }
 ```
 
-**3. `get(string $name): mixed`:**
-   - Accepts a string parameter `$name`, which represents the name of the item to retrieve.
-   - Check if the item exists in the container. If it does, return the item.
-   - If the item does not exist, throw an exception (e.g., `ItemNotFoundException`).
-
-**4. `set(string $name, $item): void`:**
-   - Accepts a string parameter `$name` and an `$item` to be set in the container.
-   - If `$item` is a callable, store it in the container.
-   - If `$item` is not a callable, consider it a regular item.
-   
-**5. Autowiring for Class Creation:**
+**3. Autowiring for Class Creation:**
    - If the requested item is a class name (FQCN) and does not exist in the container, attempt to create an instance of the class with its dependencies resolved through autowiring.
    - Use PHP's Reflection to inspect the class's constructor and its parameter types.
    - Try to resolve the dependencies by recursively calling the `get` method for each parameter type.
 
-**6. Exception Handling:**
+**4. Exception Handling:**
    - Implement appropriate exception classes, such as `ItemNotFoundException`, to handle errors when items are not found in the container.
 
-**7. Singleton Factory:**
+**5. Singleton Factory:**
    - When an item is set as a callable, it should act as a singleton factory. This means that the callable should be executed only once, and subsequent calls to `get` for the same item should return the previously created instance.
 
-**8. Usage Example:**
-   - Provide a usage example demonstrating how to use the container to store and retrieve items, including autowired class instances.
+**6. Usage Example:**
+   - Create the `RandomGreetingInterface` with a single method: `random(): string;`. This method should return a random greeting from an array of greetings (e.g., "hello," "good morning," "good evening," and more).
 
-**9. Documentation:**
+   - Implement the `RandomGreeting` class that implements the `RandomGreetingInterface`. The constructor of the `RandomGreeting` class should accept an array of greetings.
+
+   - Create the `Greeter` class, which should accept a `RandomGreetingInterface` as an argument in its constructor.
+
+   - Implement the `greet(string $name): string` method in the `Greeter` class. This method should return a greeting message in the format `sprintf("%s, %s", $this->randomGreeter->random(), $name)`.
+
+   - Register the `RandomGreetingInterface` as a callable-factory in the container, which returns an instance of the `RandomGreeting` implementation.
+
+   - Use the container's `get` method to create an instance of the `Greeter` class. The container should perform autowiring and provide the `RandomGreeting` implementation to the `Greeter` constructor.
+
+This example demonstrates how the DI container should be used to register and resolve dependencies while leveraging the autowiring feature to wire up the `Greeter` class with the `RandomGreeting` implementation.
+
+**7. Documentation:**
    - Include comments and documentation within the code to explain the functionality and usage of the container.
 
-**10. Deliverables:**
-   - Provide the PHP class for the DI container.
-   - Include a usage example.
+**8. Coding Standards:**
+   - The source code should be located under a "src/" directory.
+   - Use Composer as an autoloader.
+   - Ensure that the code adheres to PSR standards.
+
+**9. Leveraging SOLID, DRY, and KISS:**
+   - Utilize SOLID principles, Don't Repeat Yourself (DRY), and Keep It Simple, Stupid (KISS) in your code to create a well-structured and maintainable solution.
+
+**10. Final Evaluation:**
+   - We will thoroughly evaluate your solution for compliance with PSR standards, adherence to SOLID, DRY, and KISS principles, and the correct implementation of the DI container with autowiring.
 
 This technical specification outlines the requirements for a simple DI container in PHP with autowiring capabilities. Your implementation should adhere to these specifications to provide a functional and reliable DI container.
