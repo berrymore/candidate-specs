@@ -62,6 +62,7 @@ This example demonstrates how the DI container should be used to register and re
    - The source code should be located under a "src/" directory.
    - Use Composer as an autoloader.
    - Ensure that the code adheres to PSR standards.
+   - Hint: In your solution, please do not create a separate interface for the SimpleContainer class. Additionally, avoid using "PSR-11" in your implementation, as it is a standard that describes containers, and in this task, we want a simple container without creating a new interface.
 
 **9. Leveraging SOLID, DRY, and KISS:**
    - Utilize SOLID principles, Don't Repeat Yourself (DRY), and Keep It Simple, Stupid (KISS) in your code to create a well-structured and maintainable solution.
